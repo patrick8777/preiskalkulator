@@ -4,20 +4,20 @@
       <h2>Produkte:</h2>
       <ul>
         <li>
-          <label>
-            <input type="checkbox" name="produkt1" [(ngModel)]="produkt1.checked" (change)="berechneGesamtpreis()">
+          <label class="btn btn-outline-secondary" for="btn-check-2-outlined">
+            <input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" name="produkt1" [(ngModel)]="produkt1.checked" (change)="onCheckboxChange()" >
             Produkt 1
           </label>
         </li>
         <li>
           <label>
-            <input type="checkbox" name="produkt2" [(ngModel)]="produkt2.checked" (change)="berechneGesamtpreis()">
+            <input type="checkbox" name="produkt2" [(ngModel)]="produkt2.checked" (change)="onCheckboxChange()" class="form-check-input">
             Produkt 2
           </label>
         </li>
         <li>
           <label>
-            <input type="checkbox" name="produkt3" [(ngModel)]="produkt3.checked" (change)="berechneGesamtpreis()">
+            <input type="checkbox" name="produkt3" [(ngModel)]="produkt3.checked" (change)="onCheckboxChange()" class="form-check-input">
             Produkt 3
           </label>
         </li>
