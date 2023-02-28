@@ -6,7 +6,7 @@
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Add item" [(ngModel)]="newItemText">
           </div>
-          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="submit" class="btn btn-primary"><i class="bi bi-plus"></i> Add</button>
         </form>
       </div>
       <div class="col-md-6">
@@ -15,8 +15,8 @@
             <div *ngIf="!item.editing">
               {{item.text}}
               <div class="float-right">
-                <button type="button" class="btn btn-link" (click)="editItem(i)">Edit</button>
-                <button type="button" class="btn btn-link" (click)="deleteItem(i)">Delete</button>
+                <button type="button" class="btn btn-link" (click)="editItem(i)"><i class="bi bi-pen"></i> Edit</button>
+                <button type="button" class="btn btn-link" (click)="deleteItem(i)"><i class="bi bi-trash"></i> Delete</button>
               </div>
             </div>
             <div *ngIf="item.editing">
@@ -24,8 +24,8 @@
                 <div class="form-group">
                   <input type="text" class="form-control" [(ngModel)]="item.text">
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-link" (click)="cancelEditItem(i)">Cancel</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                <button type="button" class="btn btn-link" (click)="cancelEditItem(i)"><i class="bi bi-ban"></i> Cancel</button>
               </form>
             </div>
           </li>
@@ -33,6 +33,7 @@
       </div>
     </div>
   </div>
+  
   
   
 <router-outlet></router-outlet>
