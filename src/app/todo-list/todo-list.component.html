@@ -1,38 +1,53 @@
-<div class="container">
-    <h1>To-Do List</h1>
-    <div class="row">
-      <div class="col-md-6">
-        <form (ngSubmit)="addItem()">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Add item" [(ngModel)]="newItemText">
-          </div>
-          <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-      </div>
-      <div class="col-md-6">
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let item of items; let i = index;">
-            <div *ngIf="!item.editing">
-              {{item.text}}
-              <div class="float-right">
-                <button type="button" class="btn btn-link" (click)="editItem(i)">Edit</button>
-                <button type="button" class="btn btn-link" (click)="deleteItem(i)">Delete</button>
-              </div>
-            </div>
-            <div *ngIf="item.editing">
-              <form (ngSubmit)="saveItem(i)">
-                <div class="form-group">
-                  <input type="text" class="form-control" [(ngModel)]="item.text">
-                </div>
-                <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-link" (click)="cancelEditItem(i)">Cancel</button>
-              </form>
-            </div>
-          </li>
-        </ul>
+<div class="container py-5">
+  <form #todoForm="ngForm" (ngSubmit)="addTodo()" class="row mt-3">
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          type="text"
+          name="newTodo"
+          [(ngModel)]="newTodo"
+          placeholder="{{
+            multilangService.getTranslation('addToduPlaceholder')
+          }}"
+          class="form-control"
+        />
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-plus-lg"></i
+          >{{ multilangService.getTranslation("addTodu") }}
+        </button>
       </div>
     </div>
-  </div>
-  
-  
+  </form>
+  <ul class="list-group mt-3">
+    <li *ngFor="let todo of todos; let i = index" class="list-group-item">
+      <div class="input-group">
+        <span
+          [contentEditable]="todo.editable"
+          (input)="editTodoInput($event, i)"
+          (keydown.enter)="editTodoEvent($event, i)"
+          (blur)="editTodoEvent($event, i)"
+          class="form-control"
+        >
+          {{ todo.name }}
+        </span>
+        <button
+          (click)="deleteTodoConfirm(todo)"
+          class="btn btn-danger"
+          title="Delete todo"
+        >
+          <i class="bi bi-trash-fill"></i>
+        </button>
+        <button
+          (click)="saveTodoEvent($event, i)"
+          class="btn btn-success"
+          title="Save todo"
+          [hidden]="!todo.editable"
+        >
+          <i class="bi bi-check"></i>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+
 <router-outlet></router-outlet>

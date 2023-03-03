@@ -1,0 +1,23 @@
+.btn-outline-secondary {
+  margin-bottom: 5px;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+.vax-included {
+  background-color: #17a2b8;
+}
+
+.vax-not-included {
+  background-color: #f8d7da;
+}
+
+.text-success {
+  color: black;
+}
+
+.text-danger {
+  color: #dc3545;
+}

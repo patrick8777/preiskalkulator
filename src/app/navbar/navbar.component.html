@@ -1,0 +1,82 @@
+<head>
+  <meta name="description" content="Put your description here." />
+</head>
+<main>
+  <div class="b-example-divider"></div>
+  <header class="p-3 text-bg-dark">
+    <div class="container">
+      <div
+        class="nav nav-masthead d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+      >
+        <img
+          a
+          routerLink="/landing-page"
+          src="/assets/images/Logo-bwvits.png"
+          alt="Logo regioScope"
+          width="80"
+          height="64"
+          class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+        />
+        <ul
+          class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+        >
+          <li>
+            <a routerLink="/landing-page" class="nav-link fw-bold active px-2"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a routerLink="/offer-calculator" class="nav-link fw-bold px-2"
+              >Offertenkalkulator</a
+            >
+          </li>
+          <li>
+            <a routerLink="/impressum" class="nav-link fw-bold px-2">About</a>
+          </li>
+          <li>
+            <a routerLink="/contact" class="nav-link fw-bold px-2">Kontakt</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle fw-bold px-2"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {{ multilangService.getDefaultLanguage() }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLinkActive="active"
+                  (click)="changeLanguage('en')"
+                  >English</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLinkActive="active"
+                  (click)="changeLanguage('de')"
+                  >Deutsch</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLinkActive="active"
+                  (click)="changeLanguage('fr')"
+                  >Français</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+</main>
+<router-outlet></router-outlet>

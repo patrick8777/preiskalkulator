@@ -1,43 +1,77 @@
 import { Component } from '@angular/core';
+import { MultilangService } from '../services/multilang.service';
 
-interface Item {
-  text: string;
-  editing: boolean;
+interface TodoItem {
+  name: string;
+  editable: boolean;
 }
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent {
-  items: Item[] = [
-    {text: 'Item 1', editing: false},
-    {text: 'Item 2', editing: false},
-    {text: 'Item 3', editing: false},
-  ];
-  newItemText = '';
+  constructor(
+    public multilangService: MultilangService,
+    private multiLang: MultilangService
+  ) {}
 
-  addItem() {
-    if (this.newItemText.trim() !== '') {
-      this.items.push({text: this.newItemText, editing: false});
-      this.newItemText = '';
+  newTodo = '';
+  todos: TodoItem[] = [];
+
+  addTodo() {
+    if (this.newTodo.trim() !== '') {
+      this.todos.push({ name: this.newTodo, editable: false });
+      this.newTodo = '';
     }
   }
 
-  deleteItem(index: number) {
-    this.items.splice(index, 1);
+  deleteTodoConfirm(todo: TodoItem) {
+    const confirmDelete = confirm(
+      this.multiLang.getTranslation('addToduAskDel')
+    );
+    if (confirmDelete) {
+      this.deleteTodoByItem(todo);
+    }
   }
 
-  editItem(index: number) {
-    this.items[index].editing = true;
+  deleteTodoByItem(todo: TodoItem) {
+    const index = this.todos.indexOf(todo);
+    if (index >= 0) {
+      this.todos.splice(index, 1);
+    }
   }
 
-  saveItem(index: number) {
-    this.items[index].editing = false;
+  editTodoName(todo: TodoItem, newName: string) {
+    todo.name = newName;
   }
 
-  cancelEditItem(index: number) {
-    this.items[index].editing = false;
+  editTodoEditable(todo: TodoItem, editable: boolean) {
+    todo.editable = editable;
+  }
+
+  editTodoEvent(event: Event, index: number) {
+    const newName = (event.target as HTMLInputElement).textContent ?? '';
+    const todo = this.todos[index];
+    this.editTodoName(todo, newName);
+    this.editTodoEditable(todo, false);
+  }
+
+  editTodoInput(event: Event, index: number) {
+    const todo = this.todos[index];
+    this.editTodoEditable(todo, true);
+  }
+
+  saveTodoEvent(event: Event, index: number) {
+    const newName =
+      (event.target as HTMLButtonElement).parentElement
+        ?.querySelector('span')
+        ?.textContent?.trim() ?? '';
+    const todo = this.todos[index];
+    if (newName !== '') {
+      todo.name = newName;
+    }
+    this.editTodoEditable(todo, false);
   }
 }

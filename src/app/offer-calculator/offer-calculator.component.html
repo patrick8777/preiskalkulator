@@ -1,0 +1,180 @@
+<app-navbar></app-navbar>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-2">
+      <h2>{{ multilangService.getTranslation("productTitel") }}</h2>
+      <ul>
+        <li>
+          <label
+            class="btn btn-outline-secondary"
+            [class.btn-primary]="product1.checked"
+            for="btn-check-1-outlined"
+            style="font-weight: bold; color: rgb(0, 0, 0)"
+          >
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-1-outlined"
+              checked
+              autocomplete="off"
+              name="produkt1"
+              [(ngModel)]="product1.checked"
+              (change)="onCheckboxChange()"
+            />
+            {{ multilangService.getTranslation("product1") }}
+          </label>
+        </li>
+        <li>
+          <label
+            class="btn btn-outline-secondary"
+            [class.btn-primary]="product2.checked"
+            style="font-weight: bold; color: rgb(0, 0, 0)"
+          >
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-2-outlined"
+              checked
+              autocomplete="off"
+              name="produkt2"
+              [(ngModel)]="product2.checked"
+              (change)="onCheckboxChange()"
+            />
+            {{ multilangService.getTranslation("product2") }}
+          </label>
+        </li>
+        <li>
+          <label
+            class="btn btn-outline-secondary"
+            [class.btn-primary]="product3.checked"
+            style="font-weight: bold; color: rgb(0, 0, 0)"
+          >
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-3-outlined"
+              checked
+              autocomplete="off"
+              name="produkt3"
+              [(ngModel)]="product3.checked"
+              (change)="onCheckboxChange()"
+            />
+            {{ multilangService.getTranslation("product3") }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h2>{{ multilangService.getTranslation("priceTotal") }}</h2>
+      <ng-container
+        *ngIf="product1.checked || product2.checked || product3.checked"
+      >
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{{ multilangService.getTranslation("productColum") }}</th>
+              <th>{{ multilangService.getTranslation("priceColum") }}</th>
+              <th>{{ multilangService.getTranslation("vatColum") }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="product1.checked">
+              <td>{{ multilangService.getTranslation("product1") }}</td>
+              <td>{{ product1.price | currency : "CHF " }}</td>
+              <td>
+                {{ (product1.price * vatPercent) / 100 | currency : "CHF " }}
+              </td>
+            </tr>
+            <tr *ngIf="product2.checked">
+              <td>{{ multilangService.getTranslation("product2") }}</td>
+              <td>{{ product2.price | currency : "CHF " }}</td>
+              <td>
+                {{ (product2.price * vatPercent) / 100 | currency : "CHF " }}
+              </td>
+            </tr>
+            <tr *ngIf="product3.checked">
+              <td>{{ multilangService.getTranslation("product3") }}</td>
+              <td>{{ product3.price | currency : "CHF " }}</td>
+              <td>
+                {{ (product3.price * vatPercent) / 100 | currency : "CHF " }}
+              </td>
+            </tr>
+            <!--  <tr>
+              <td>{{ multilangService.getTranslation("priceTotal") }}</td>
+              <td>{{ priceTotal | currency : "CHF " }}</td>
+            </tr>
+            <tr>
+              <td>{{ multilangService.getTranslation("vatNotIncluded") }}</td>
+              <td>{{ priceTotal - vatAmount | currency : "CHF " }}</td>
+            </tr>
+            <tr>
+              <td>{{ multilangService.getTranslation("vatAmount") }}</td>
+              <td>{{ vatAmount | currency : "CHF " }}</td>
+            </tr> -->
+          </tbody>
+        </table>
+        <div
+          class="card"
+          [ngClass]="{
+            'vax-included':
+              product1.checked || product2.checked || product3.checked,
+            'vax-not-included':
+              !product1.checked && !product2.checked && !product3.checked,
+            'vat-included': priceTotal > 0,
+            'vat-not-included': priceTotal === 0
+          }"
+        >
+          <div class="card-body">
+            <!-- <h5 class="card-title">
+              {{ multilangService.getTranslation("priceTotal") }}
+            </h5> -->
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <td>{{ multilangService.getTranslation("priceTotal") }}</td>
+                  <td>{{ priceTotal | currency : "CHF " }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    {{ multilangService.getTranslation("vatNotIncluded") }}
+                  </td>
+                  <td>{{ priceTotal - vatAmount | currency : "CHF " }}</td>
+                </tr>
+                <tr>
+                  <td>{{ multilangService.getTranslation("vatAmount") }}</td>
+                  <td>{{ vatAmount | currency : "CHF " }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </ng-container>
+      <div *ngIf="!product1.checked && !product2.checked && !product3.checked">
+        {{ multilangService.getTranslation("selectProduct") }}
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <label>
+    <input
+      type="radio"
+      name="vatPercent"
+      [(ngModel)]="vatPercent"
+      value="7.7"
+      checked
+    />
+    7.7% VAT
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="vatPercent"
+      [(ngModel)]="vatPercent"
+      value="2.5"
+    />
+    2.5% VAT
+  </label>
+</div>
+<router-outlet></router-outlet>

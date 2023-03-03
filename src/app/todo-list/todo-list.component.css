@@ -1,0 +1,5 @@
+.input-group,
+.list-group,
+.list-group-item {
+  max-width: 350px;
+}
