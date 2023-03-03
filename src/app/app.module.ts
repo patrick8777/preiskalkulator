@@ -8,6 +8,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { OfferCalculatorComponent } from './offer-calculator/offer-calculator.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { OfferCalculatorComponent } from './offer-calculator/offer-calculator.co
     NavbarComponent,
     LandingPageComponent,
     OfferCalculatorComponent,
+    FooterComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],

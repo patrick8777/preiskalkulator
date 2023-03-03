@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { OfferCalculatorComponent } from './offer-calculator/offer-calculator.component';
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'navbar',
     component: NavbarComponent,
+  },
+  {
+    path: 'footer',
+    component: FooterComponent,
   },
   {
     path: 'offer-calculator',
