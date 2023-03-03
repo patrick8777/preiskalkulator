@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MultilangService } from '../services/multilang.service';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-offer-calculator',
@@ -10,6 +12,7 @@ import { MultilangService } from '../services/multilang.service';
 export class OfferCalculatorComponent {
   constructor(
     public multilangService: MultilangService,
+    private multiLang: MultilangService,
     private router: Router
   ) {}
   product1 = {
@@ -67,5 +70,23 @@ export class OfferCalculatorComponent {
   saveProduct(): void {
     // TODO: save edited product to backend
     this.closeDialog();
+  }
+  //HTML TO PDF
+  public openPDF(): void {
+    // Get the translated filename from the translation service
+    const fileName = this.multiLang.getTranslation('pdfFileName');
+
+    let DATA: any = document.getElementById('htmlData');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+
+      // Use the translated filename as the PDF name when saving
+      PDF.save(`${fileName}.pdf`);
+    });
   }
 }

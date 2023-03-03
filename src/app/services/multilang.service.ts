@@ -196,6 +196,16 @@ export class MultilangService {
       de: 'Sind Sie sicher, dass Sie dieses ToDo löschen möchten?',
       fr: 'Êtes-vous sûr de vouloir supprimer cette tâche?',
     },
+    pdfFileName: {
+      en: 'offer-calculator',
+      de: 'offertenkalkulator',
+      fr: 'calculateur-offre',
+    },
+    pdfFileToolTipp: {
+      en: 'Download calculator as PDF',
+      de: 'Kalkulator als PDF herunterladen',
+      fr: 'Télécharger le calculateur au format PDF',
+    },
   };
   getTranslation(key: string, lang?: string) {
     if (this.translations[key]) {

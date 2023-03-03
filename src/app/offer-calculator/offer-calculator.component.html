@@ -1,7 +1,49 @@
 <app-navbar></app-navbar>
-<div class="container py-5">
+<div class="container py-5" id="htmlData">
+  <div class="col-md-4 text-right">
+    <button
+      class="btn btn-success btn-block"
+      (click)="openPDF()"
+      title="{{ multilangService.getTranslation('pdfFileToolTipp') }}"
+    >
+      <i class="bi bi-file-earmark-pdf"></i>
+    </button>
+  </div>
   <div class="row justify-content-center">
     <div class="col-md-2">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-success">
+          <input
+            type="radio"
+            name="options"
+            id="option1"
+            [(ngModel)]="vatPercent"
+            value="7.7"
+            checked
+          />
+          7.7% VAT
+        </label>
+        <label class="btn btn-primary">
+          <input
+            type="radio"
+            name="options"
+            id="option2"
+            [(ngModel)]="vatPercent"
+            value="2.5"
+          />
+          2.5% VAT
+        </label>
+        <label class="btn btn-danger">
+          <input
+            type="radio"
+            name="options"
+            id="option3"
+            [(ngModel)]="vatPercent"
+            value="3.7"
+          />
+          3.7% VAT
+        </label>
+      </div>
       <h2>{{ multilangService.getTranslation("productTitel") }}</h2>
       <ul>
         <li>
@@ -156,25 +198,5 @@
     </div>
   </div>
 </div>
-<div>
-  <label>
-    <input
-      type="radio"
-      name="vatPercent"
-      [(ngModel)]="vatPercent"
-      value="7.7"
-      checked
-    />
-    7.7% VAT
-  </label>
-  <label>
-    <input
-      type="radio"
-      name="vatPercent"
-      [(ngModel)]="vatPercent"
-      value="2.5"
-    />
-    2.5% VAT
-  </label>
-</div>
+<div></div>
 <router-outlet></router-outlet>
