@@ -8,6 +8,9 @@
     >
       <i class="bi bi-file-earmark-pdf"></i>
     </button>
+    <button class="btn btn-primary btn-block">
+      <i class="bi bi-gear-fill"></i>
+    </button>
   </div>
   <div class="row justify-content-center">
     <div class="col-md-2">
@@ -44,12 +47,12 @@
           3.7% VAT
         </label>
       </div>
-      <h2>{{ multilangService.getTranslation("productTitel") }}</h2>
+      <h2>{{ multilangService.getTranslation("serviceTitel") }}</h2>
       <ul>
         <li>
           <label
             class="btn btn-outline-secondary"
-            [class.btn-primary]="product1.checked"
+            [class.btn-primary]="service1.checked"
             for="btn-check-1-outlined"
             style="font-weight: bold; color: rgb(0, 0, 0)"
           >
@@ -59,17 +62,17 @@
               id="btn-check-1-outlined"
               checked
               autocomplete="off"
-              name="produkt1"
-              [(ngModel)]="product1.checked"
+              name="service1"
+              [(ngModel)]="service1.checked"
               (change)="onCheckboxChange()"
             />
-            {{ multilangService.getTranslation("product1") }}
+            {{ multilangService.getTranslation("service1") }}
           </label>
         </li>
         <li>
           <label
             class="btn btn-outline-secondary"
-            [class.btn-primary]="product2.checked"
+            [class.btn-primary]="service2.checked"
             style="font-weight: bold; color: rgb(0, 0, 0)"
           >
             <input
@@ -78,17 +81,17 @@
               id="btn-check-2-outlined"
               checked
               autocomplete="off"
-              name="produkt2"
-              [(ngModel)]="product2.checked"
+              name="service2"
+              [(ngModel)]="service2.checked"
               (change)="onCheckboxChange()"
             />
-            {{ multilangService.getTranslation("product2") }}
+            {{ multilangService.getTranslation("service2") }}
           </label>
         </li>
         <li>
           <label
             class="btn btn-outline-secondary"
-            [class.btn-primary]="product3.checked"
+            [class.btn-primary]="service3.checked"
             style="font-weight: bold; color: rgb(0, 0, 0)"
           >
             <input
@@ -98,48 +101,48 @@
               checked
               autocomplete="off"
               name="produkt3"
-              [(ngModel)]="product3.checked"
+              [(ngModel)]="service3.checked"
               (change)="onCheckboxChange()"
             />
-            {{ multilangService.getTranslation("product3") }}
+            {{ multilangService.getTranslation("service3") }}
           </label>
         </li>
       </ul>
     </div>
 
     <div class="col-md-6">
-      <h2>{{ multilangService.getTranslation("priceTotal") }}</h2>
+      <!-- <h2>{{ multilangService.getTranslation("priceTotal") }}</h2> -->
       <ng-container
-        *ngIf="product1.checked || product2.checked || product3.checked"
+        *ngIf="service1.checked || service2.checked || service3.checked"
       >
         <table class="table">
           <thead>
             <tr>
-              <th>{{ multilangService.getTranslation("productColum") }}</th>
+              <th>{{ multilangService.getTranslation("serviceColum") }}</th>
               <th>{{ multilangService.getTranslation("priceColum") }}</th>
               <th>{{ multilangService.getTranslation("vatColum") }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngIf="product1.checked">
-              <td>{{ multilangService.getTranslation("product1") }}</td>
-              <td>{{ product1.price | currency : "CHF " }}</td>
+            <tr *ngIf="service1.checked">
+              <td>{{ multilangService.getTranslation("service1") }}</td>
+              <td>{{ service1.price | currency : "CHF " }}</td>
               <td>
-                {{ (product1.price * vatPercent) / 100 | currency : "CHF " }}
+                {{ (service1.price * vatPercent) / 100 | currency : "CHF " }}
               </td>
             </tr>
-            <tr *ngIf="product2.checked">
-              <td>{{ multilangService.getTranslation("product2") }}</td>
-              <td>{{ product2.price | currency : "CHF " }}</td>
+            <tr *ngIf="service2.checked">
+              <td>{{ multilangService.getTranslation("service2") }}</td>
+              <td>{{ service2.price | currency : "CHF " }}</td>
               <td>
-                {{ (product2.price * vatPercent) / 100 | currency : "CHF " }}
+                {{ (service2.price * vatPercent) / 100 | currency : "CHF " }}
               </td>
             </tr>
-            <tr *ngIf="product3.checked">
-              <td>{{ multilangService.getTranslation("product3") }}</td>
-              <td>{{ product3.price | currency : "CHF " }}</td>
+            <tr *ngIf="service3.checked">
+              <td>{{ multilangService.getTranslation("service3") }}</td>
+              <td>{{ service3.price | currency : "CHF " }}</td>
               <td>
-                {{ (product3.price * vatPercent) / 100 | currency : "CHF " }}
+                {{ (service3.price * vatPercent) / 100 | currency : "CHF " }}
               </td>
             </tr>
             <!--  <tr>
@@ -160,9 +163,9 @@
           class="card"
           [ngClass]="{
             'vax-included':
-              product1.checked || product2.checked || product3.checked,
+              service1.checked || service2.checked || service3.checked,
             'vax-not-included':
-              !product1.checked && !product2.checked && !product3.checked,
+              !service1.checked && !service2.checked && !service3.checked,
             'vat-included': priceTotal > 0,
             'vat-not-included': priceTotal === 0
           }"
@@ -192,7 +195,7 @@
           </div>
         </div>
       </ng-container>
-      <div *ngIf="!product1.checked && !product2.checked && !product3.checked">
+      <div *ngIf="!service1.checked && !service2.checked && !service3.checked">
         {{ multilangService.getTranslation("selectProduct") }}
       </div>
     </div>

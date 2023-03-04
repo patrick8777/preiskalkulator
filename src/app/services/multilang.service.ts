@@ -98,52 +98,41 @@ export class MultilangService {
       de: 'Informationen',
       fr: 'Informations',
     },
-    // Dashboard and Table
-    placeLabel: {
-      en: 'Place',
-      de: 'Gemeinde',
-      fr: 'Commune',
-    },
-    europeLabel: {
-      en: 'Europe',
-      de: 'Europa',
-      fr: 'Europe',
-    },
     //price-calculator
-    productLabel: {
-      en: 'Product1',
-      de: 'Produkt1',
-      fr: 'Europe',
+    serviceLabel: {
+      en: 'Service1',
+      de: 'Dienstleistung1',
+      fr: 'Service1',
     },
-    productTitel: {
-      en: 'Products:',
-      de: 'Produkte:',
-      fr: 'Europe:',
+    serviceTitel: {
+      en: 'Services:',
+      de: 'Dienstleistung:',
+      fr: 'Services:',
     },
-    product1: {
-      en: 'Product 1',
-      de: 'Produkt 1',
-      fr: 'Europe:',
+    service1: {
+      en: 'Service 1',
+      de: 'Dienstleistung 1',
+      fr: 'Service 1',
     },
-    product2: {
-      en: 'Product 2',
-      de: 'Produkt 2',
-      fr: 'Europe:',
+    service2: {
+      en: 'Service 2',
+      de: 'Dienstleistung 2',
+      fr: 'Service 2',
     },
-    product3: {
-      en: 'Product 3',
-      de: 'Produkt 3',
-      fr: 'Europe:',
+    service3: {
+      en: 'Service 3',
+      de: 'Dienstleistung 3',
+      fr: 'Service 2',
     },
-    productColum: {
-      en: 'Product',
-      de: 'Produkt',
-      fr: 'Europe:',
+    serviceColum: {
+      en: 'Service',
+      de: 'Dienstleistung',
+      fr: 'Service',
     },
     priceColum: {
       en: 'Price',
       de: 'Preis',
-      fr: 'Europe:',
+      fr: 'Prix',
     },
     priceTotal: {
       en: 'Price total:',

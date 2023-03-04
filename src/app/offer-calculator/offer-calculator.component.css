@@ -6,6 +6,9 @@ ul,
 li {
   list-style-type: none;
 }
+.btn-block {
+  margin-left: 5px;
+}
 .vax-included {
   background-color: #17a2b8;
 }

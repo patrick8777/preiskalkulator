@@ -15,31 +15,31 @@ export class OfferCalculatorComponent {
     private multiLang: MultilangService,
     private router: Router
   ) {}
-  product1 = {
+  service1 = {
     checked: false,
     price: 10,
   };
-  product2 = { checked: false, price: 20 };
-  product3 = { checked: false, price: 30 };
+  service2 = { checked: false, price: 20 };
+  service3 = { checked: false, price: 30 };
   priceTotal = 0;
   vatPercent = 7.7; // default VAT percentage
   vatAmount = 0;
 
   onCheckboxChange(): void {
     if (
-      this.product1.checked ||
-      this.product2.checked ||
-      this.product3.checked
+      this.service1.checked ||
+      this.service2.checked ||
+      this.service3.checked
     ) {
       this.priceTotal = 0;
-      if (this.product1.checked) {
-        this.priceTotal += this.product1.price;
+      if (this.service1.checked) {
+        this.priceTotal += this.service1.price;
       }
-      if (this.product2.checked) {
-        this.priceTotal += this.product2.price;
+      if (this.service2.checked) {
+        this.priceTotal += this.service2.price;
       }
-      if (this.product3.checked) {
-        this.priceTotal += this.product3.price;
+      if (this.service3.checked) {
+        this.priceTotal += this.service3.price;
       }
       // calculate VAT amount and add it to the total price
       this.vatAmount = this.priceTotal * (this.vatPercent / 100);
@@ -57,20 +57,6 @@ export class OfferCalculatorComponent {
     { id: 3, name: 'Product 3', price: 30 },
   ];
 
-  editedProduct = { id: 0, name: '', price: 0 };
-  showDialog = false;
-
-  editProduct(id: number): void {
-    // find the product to edit by
-  }
-  closeDialog(): void {
-    this.showDialog = false;
-  }
-
-  saveProduct(): void {
-    // TODO: save edited product to backend
-    this.closeDialog();
-  }
   //HTML TO PDF
   public openPDF(): void {
     // Get the translated filename from the translation service
