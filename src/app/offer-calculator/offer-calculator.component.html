@@ -48,63 +48,28 @@
         </label>
       </div>
       <h2>{{ multilangService.getTranslation("serviceTitel") }}</h2>
+      <button (click)="onToggleEditModal()">Add</button>
       <ul>
-        <li>
+        <li *ngFor="let service of services">
+          <button (click)="deleteProduct(service.name)">
+            <i class="bi bi-trash-fill"></i>
+          </button>
           <label
             class="btn btn-outline-secondary"
-            [class.btn-primary]="service1.checked"
-            for="btn-check-1-outlined"
+            [class.btn-primary]="service.checked"
+            [for]="service.name"
             style="font-weight: bold; color: rgb(0, 0, 0)"
           >
             <input
               type="checkbox"
               class="btn-check"
-              id="btn-check-1-outlined"
-              checked
-              autocomplete="off"
-              name="service1"
-              [(ngModel)]="service1.checked"
+              [id]="service.name"
+              [name]="service.name"
+              [(ngModel)]="service.checked"
               (change)="onCheckboxChange()"
             />
-            {{ multilangService.getTranslation("service1") }}
-          </label>
-        </li>
-        <li>
-          <label
-            class="btn btn-outline-secondary"
-            [class.btn-primary]="service2.checked"
-            style="font-weight: bold; color: rgb(0, 0, 0)"
-          >
-            <input
-              type="checkbox"
-              class="btn-check"
-              id="btn-check-2-outlined"
-              checked
-              autocomplete="off"
-              name="service2"
-              [(ngModel)]="service2.checked"
-              (change)="onCheckboxChange()"
-            />
-            {{ multilangService.getTranslation("service2") }}
-          </label>
-        </li>
-        <li>
-          <label
-            class="btn btn-outline-secondary"
-            [class.btn-primary]="service3.checked"
-            style="font-weight: bold; color: rgb(0, 0, 0)"
-          >
-            <input
-              type="checkbox"
-              class="btn-check"
-              id="btn-check-3-outlined"
-              checked
-              autocomplete="off"
-              name="produkt3"
-              [(ngModel)]="service3.checked"
-              (change)="onCheckboxChange()"
-            />
-            {{ multilangService.getTranslation("service3") }}
+            <!-- {{ multilangService.getTranslation(service.name) }} -->
+            {{ service.name }}
           </label>
         </li>
       </ul>
@@ -112,9 +77,7 @@
 
     <div class="col-md-6">
       <!-- <h2>{{ multilangService.getTranslation("priceTotal") }}</h2> -->
-      <ng-container
-        *ngIf="service1.checked || service2.checked || service3.checked"
-      >
+      <ng-container *ngIf="!areAllServicesUnchecked()">
         <table class="table">
           <thead>
             <tr>
@@ -124,53 +87,27 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngIf="service1.checked">
-              <td>{{ multilangService.getTranslation("service1") }}</td>
-              <td>{{ service1.price | currency : "CHF " }}</td>
-              <td>
-                {{ (service1.price * vatPercent) / 100 | currency : "CHF " }}
-              </td>
-            </tr>
-            <tr *ngIf="service2.checked">
-              <td>{{ multilangService.getTranslation("service2") }}</td>
-              <td>{{ service2.price | currency : "CHF " }}</td>
-              <td>
-                {{ (service2.price * vatPercent) / 100 | currency : "CHF " }}
-              </td>
-            </tr>
-            <tr *ngIf="service3.checked">
-              <td>{{ multilangService.getTranslation("service3") }}</td>
-              <td>{{ service3.price | currency : "CHF " }}</td>
-              <td>
-                {{ (service3.price * vatPercent) / 100 | currency : "CHF " }}
-              </td>
-            </tr>
-            <!--  <tr>
-              <td>{{ multilangService.getTranslation("priceTotal") }}</td>
-              <td>{{ priceTotal | currency : "CHF " }}</td>
-            </tr>
-            <tr>
-              <td>{{ multilangService.getTranslation("vatNotIncluded") }}</td>
-              <td>{{ priceTotal - vatAmount | currency : "CHF " }}</td>
-            </tr>
-            <tr>
-              <td>{{ multilangService.getTranslation("vatAmount") }}</td>
-              <td>{{ vatAmount | currency : "CHF " }}</td>
-            </tr> -->
+            <ng-container *ngFor="let service of services">
+              <tr *ngIf="service.checked">
+                <td>{{ multilangService.getTranslation(service.name) }}</td>
+                <td>{{ service.price | currency : "CHF " }}</td>
+                <td>
+                  {{ (service.price * vatPercent) / 100 | currency : "CHF " }}
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
         <div
           class="card"
           [ngClass]="{
-            'vax-included':
-              service1.checked || service2.checked || service3.checked,
-            'vax-not-included':
-              !service1.checked && !service2.checked && !service3.checked,
+            'vax-included': !areAllServicesUnchecked(),
+            'vax-not-included': areAllServicesUnchecked(),
             'vat-included': priceTotal > 0,
             'vat-not-included': priceTotal === 0
           }"
         >
-          <div class="card-body">
+          <div class="card-body" *ngIf="!areAllServicesUnchecked()">
             <!-- <h5 class="card-title">
               {{ multilangService.getTranslation("priceTotal") }}
             </h5> -->
@@ -195,7 +132,7 @@
           </div>
         </div>
       </ng-container>
-      <div *ngIf="!service1.checked && !service2.checked && !service3.checked">
+      <div *ngIf="areAllServicesUnchecked()">
         {{ multilangService.getTranslation("selectProduct") }}
       </div>
     </div>
@@ -203,4 +140,9 @@
 </div>
 <div></div>
 <!-- <app-footer></app-footer> -->
+<app-dialog-window
+  *ngIf="showEditModal"
+  (saveEvent)="addProduct($event)"
+  (closeEvent)="onToggleEditModal()"
+></app-dialog-window>
 <router-outlet></router-outlet>

@@ -1,0 +1,14 @@
+<div class="overlay"></div>
+<div class="content">
+  <label for="name">Name</label>
+  <input [(ngModel)]="name" id="name" type="text" placeholder="Name" />
+
+  <label for="price">Price</label>
+  <input [(ngModel)]="price" id="price" type="number" placeholder="250" />
+
+  <label for="confirm"></label>
+  <input id="confirm" type="button" value="Save" (click)="onClose('save')" />
+
+  <label for="cancel"></label>
+  <input id="cancel" type="button" value="Cancel" (click)="onClose('close')" />
+</div>

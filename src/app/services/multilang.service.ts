@@ -201,7 +201,7 @@ export class MultilangService {
       const translation = this.translations[key][lang || this.currentLang];
       return translation || this.translations[key].en;
     }
-    return undefined;
+    return key;
   }
 
   getDefaultLanguage() {

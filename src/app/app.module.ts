@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { OfferCalculatorComponent } from './offer-calculator/offer-calculator.component';
 import { FooterComponent } from './footer/footer.component';
+import { DialogWindowComponent } from './dialog-window/dialog-window.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
     LandingPageComponent,
     OfferCalculatorComponent,
     FooterComponent,
+    DialogWindowComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],

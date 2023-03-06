@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DialogWindowComponent } from './dialog-window/dialog-window.component';
 import { FooterComponent } from './footer/footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'offer-calculator',
     component: OfferCalculatorComponent,
+  },
+  {
+    path: 'dialog-window',
+    component: DialogWindowComponent,
   },
 ];
 

@@ -15,47 +15,52 @@ export class OfferCalculatorComponent {
     private multiLang: MultilangService,
     private router: Router
   ) {}
-  service1 = {
-    checked: false,
-    price: 10,
-  };
-  service2 = { checked: false, price: 20 };
-  service3 = { checked: false, price: 30 };
+  services: any = [
+    { checked: false, price: 20, name: 'service1' },
+    { checked: false, price: 50, name: 'service2' },
+  ];
   priceTotal = 0;
   vatPercent = 7.7; // default VAT percentage
   vatAmount = 0;
+  showEditModal: boolean = false;
+
+  onToggleEditModal() {
+    this.showEditModal = !this.showEditModal;
+  }
+
+  addProduct(product: { checked: boolean; price: number; name: string }) {
+    this.services.push(product);
+    this.showEditModal = false;
+  }
+
+  deleteProduct(name: string) {
+    this.services = this.services.filter(
+      (service: any) => service.name !== name
+    );
+  }
+
+  areAllServicesUnchecked() {
+    let result = true;
+    this.services.map((service: any) => {
+      if (service.checked) {
+        result = false;
+      }
+    });
+    return result;
+  }
 
   onCheckboxChange(): void {
-    if (
-      this.service1.checked ||
-      this.service2.checked ||
-      this.service3.checked
-    ) {
+    const activeServices: any[] = this.services.filter(
+      (service: any) => service.checked
+    );
+    if (activeServices.length) {
       this.priceTotal = 0;
-      if (this.service1.checked) {
-        this.priceTotal += this.service1.price;
-      }
-      if (this.service2.checked) {
-        this.priceTotal += this.service2.price;
-      }
-      if (this.service3.checked) {
-        this.priceTotal += this.service3.price;
-      }
-      // calculate VAT amount and add it to the total price
-      this.vatAmount = this.priceTotal * (this.vatPercent / 100);
-      this.priceTotal += this.vatAmount;
+      activeServices.map((service: any) => (this.priceTotal = service.price));
     }
-  }
 
-  onCalculate(): void {
-    this.onCheckboxChange();
+    this.vatAmount = this.priceTotal * (this.vatPercent / 100);
+    this.priceTotal += this.vatAmount;
   }
-  // products array, can be populated from an API or a local storage
-  products = [
-    { id: 1, name: 'Product 1', price: 10 },
-    { id: 2, name: 'Product 2', price: 20 },
-    { id: 3, name: 'Product 3', price: 30 },
-  ];
 
   //HTML TO PDF
   public openPDF(): void {
@@ -74,5 +79,10 @@ export class OfferCalculatorComponent {
       // Use the translated filename as the PDF name when saving
       PDF.save(`${fileName}.pdf`);
     });
+
+    // var link = document.createElement('a');
+    // document.body.appendChild(link);
+    // link.href = `${fileName}.pdf`;
+    // link.click();
   }
 }
