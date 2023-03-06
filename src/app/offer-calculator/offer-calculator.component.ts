@@ -33,6 +33,14 @@ export class OfferCalculatorComponent {
     this.showEditModal = false;
   }
 
+  editProduct(name: string, newName: string) {
+    this.services.forEach((service: any) => {
+      if (service.name === name) {
+        service.name = newName;
+      }
+    });
+  }
+
   deleteProduct(name: string) {
     this.services = this.services.filter(
       (service: any) => service.name !== name
