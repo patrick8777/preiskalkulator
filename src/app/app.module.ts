@@ -10,6 +10,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { OfferCalculatorComponent } from './offer-calculator/offer-calculator.component';
 import { FooterComponent } from './footer/footer.component';
 import { DialogWindowComponent } from './dialog-window/dialog-window.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { DialogWindowComponent } from './dialog-window/dialog-window.component';
     OfferCalculatorComponent,
     FooterComponent,
     DialogWindowComponent,
+    ContactComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],

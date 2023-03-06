@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContactComponent } from './contact/contact.component';
 import { DialogWindowComponent } from './dialog-window/dialog-window.component';
 import { FooterComponent } from './footer/footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'dialog-window',
     component: DialogWindowComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
   },
 ];
 
