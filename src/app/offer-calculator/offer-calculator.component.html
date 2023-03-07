@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container py-5" id="htmlData">
-  <div class="col-md-4 text-right">
+  <div class="col-md-6 text-right">
     <button
       class="btn btn-success btn-block"
       (click)="openPDF()"
@@ -14,7 +14,7 @@
     </button>
   </div>
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-6">
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-success">
           <input
@@ -61,7 +61,7 @@
 
       <ul>
         <li *ngFor="let service of services">
-          <div class="col md-8">
+          <div class="col-md-6">
             <label
               class="btn btn-outline-secondary"
               [class.btn-primary]="service.checked"
@@ -81,7 +81,6 @@
             </label>
 
             <button
-            *ngIf="editProduct"
             class="btn btn-primary btn-block"
             (click)="editProduct(service.name, 'newName')"
           >
@@ -120,7 +119,7 @@
           </tbody>
         </table>
         <div
-          class="card"
+          class="card col-md-6"
           [ngClass]="{
             'vax-included': !areAllServicesUnchecked(),
             'vax-not-included': areAllServicesUnchecked(),

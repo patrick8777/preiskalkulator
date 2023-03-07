@@ -12,6 +12,9 @@ import { FooterComponent } from './footer/footer.component';
 import { DialogWindowComponent } from './dialog-window/dialog-window.component';
 import { ContactComponent } from './contact/contact.component';
 
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { ExamplePdfViewerComponent } from './example-pdf-viewer/example-pdf-viewer.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,8 +25,10 @@ import { ContactComponent } from './contact/contact.component';
     FooterComponent,
     DialogWindowComponent,
     ContactComponent,
+    ExamplePdfViewerComponent
+   
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, NgxExtendedPdfViewerModule],
   providers: [],
   bootstrap: [
     AppComponent,
@@ -31,6 +36,7 @@ import { ContactComponent } from './contact/contact.component';
     NavbarComponent,
     OfferCalculatorComponent,
     LandingPageComponent,
+    NgxExtendedPdfViewerModule,
   ],
 })
 export class AppModule {}
