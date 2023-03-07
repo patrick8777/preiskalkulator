@@ -1,30 +1,34 @@
 <head>
   <meta name="description" content="Put your description here." />
 </head>
-<main>
-  <div class="b-example-divider"></div>
-  <header class="p-3 text-bg-dark">
-    <div class="container">
-      <div
-        class="nav nav-masthead d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-      >
-        <img
-          a
-          routerLink="/landing-page"
-          src="/assets/images/Logo-bwvits.png"
-          alt="Logo regioScope"
-          width="80"
-          height="64"
-          class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
-        />
-        <ul
-          class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-        >
-          <li>
-            <a routerLink="/landing-page" class="nav-link fw-bold active px-2"
-              >Home</a
-            >
-          </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/landing-page">
+      <img
+        src="/assets/images/logo-bwvits.png"
+        width="70"
+        height="64"
+        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarText"
+      aria-controls="navbarText"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a routerLink="/landing-page" class="nav-link fw-bold active px-2"
+            >Home</a
+          >
+        </li>
           <li>
             <a routerLink="/offer-calculator" class="nav-link fw-bold px-2"
               >Offertenkalkulator</a
@@ -77,6 +81,4 @@
         </ul>
       </div>
     </div>
-  </header>
-</main>
 <router-outlet></router-outlet>
