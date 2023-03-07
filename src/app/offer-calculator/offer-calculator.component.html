@@ -80,12 +80,12 @@
               {{ service.name }}
             </label>
 
-            <button
+           <!--  <button
             class="btn btn-primary btn-block"
             (click)="editProduct(service.name, 'newName')"
           >
             <i class="bi bi-pencil-square"></i>
-          </button>
+          </button> -->
             <button
               class="btn btn-danger btn-block"
               (click)="deleteProduct(service.name)"
@@ -98,7 +98,7 @@
 
       <!-- <h2>{{ multilangService.getTranslation("priceTotal") }}</h2> -->
       <ng-container *ngIf="!areAllServicesUnchecked()">
-        <table class="table">
+        <table class="col-md-6">
           <thead>
             <tr>
               <th>{{ multilangService.getTranslation("serviceColum") }}</th>

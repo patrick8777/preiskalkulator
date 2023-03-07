@@ -10,7 +10,7 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./offer-calculator.component.css'],
 })
 export class OfferCalculatorComponent {
-  constructor(
+   constructor(
     public multilangService: MultilangService,
     private multiLang: MultilangService,
     private router: Router
@@ -38,6 +38,7 @@ export class OfferCalculatorComponent {
       if (service.name === name) { 
         return {checked: false, price: 30, name: newName};
       }
+      // add a default return statement here
       return service;
     });
   }
@@ -65,7 +66,7 @@ export class OfferCalculatorComponent {
     );
     if (activeServices.length) {
       this.priceTotal = 0;
-      activeServices.map((service: any) => (this.priceTotal = service.price));
+      activeServices.map((service: any) => (this.priceTotal += service.price));
     }
 
     this.vatAmount = this.priceTotal * (this.vatPercent / 100);
