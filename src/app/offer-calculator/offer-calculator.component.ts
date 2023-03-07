@@ -34,12 +34,14 @@ export class OfferCalculatorComponent {
   }
 
   editProduct(name: string, newName: string) {
-    this.services.forEach((service: any) => {
-      if (service.name === name) {
-        service.name = newName;
+    this.services = this.services.map((service: any) => {
+      if (service.name === name) { 
+        return {checked: false, price: 30, name: newName};
       }
+      return service;
     });
   }
+  
 
   deleteProduct(name: string) {
     this.services = this.services.filter(
@@ -74,38 +76,20 @@ export class OfferCalculatorComponent {
   public openPDF(): void {
     // Get the translated filename from the translation service
     const fileName = this.multiLang.getTranslation('pdfFileName');
-
-    // Get the htmlData element
     let DATA: any = document.getElementById('htmlData');
-
-    // Create a canvas from the htmlData element
     html2canvas(DATA).then((canvas) => {
-      // Create a data URL from the canvas
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
       const FILEURI = canvas.toDataURL('image/png');
-
-      // Create a Blob object with the PDF data URL
-      const pdfBlob = new Blob([FILEURI], { type: 'application/pdf' });
-
-      // Create a temporary URL for the Blob object
-      const pdfUrl = URL.createObjectURL(pdfBlob);
-
-      // Create an iframe element and load the PDF data into it
-      const iframe = document.createElement('iframe');
-      iframe.setAttribute('src', pdfUrl);
-      iframe.style.position = 'absolute';
-      iframe.style.top = '0';
-      iframe.style.left = '0';
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
-
-      // Add the iframe to the document body and request full screen mode
-      document.body.appendChild(iframe);
-      iframe.requestFullscreen();
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      // Use the translated filename as the PDF name when saving
+      PDF.save(`${fileName}.pdf`);
     });
-  }
-
   // var link = document.createElement('a');
   // document.body.appendChild(link);
   // link.href = `${fileName}.pdf`;
   // link.click();
+}
 }

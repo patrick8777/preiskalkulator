@@ -81,11 +81,12 @@
             </label>
 
             <button
-              class="btn btn-primary btn-block"
-              (click)="editProduct(service.name, 'newName')"
-            >
-              <i class="bi bi-pencil-square"></i>
-            </button>
+            *ngIf="editProduct"
+            class="btn btn-primary btn-block"
+            (click)="editProduct(service.name, 'newName')"
+          >
+            <i class="bi bi-pencil-square"></i>
+          </button>
             <button
               class="btn btn-danger btn-block"
               (click)="deleteProduct(service.name)"
