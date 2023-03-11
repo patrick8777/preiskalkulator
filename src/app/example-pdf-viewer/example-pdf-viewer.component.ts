@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
@@ -12,7 +13,7 @@ export class ExamplePdfViewerComponent {
    *  to use the "find" api, to extract text and images from a PDF file,
    *  to print programmatically, and to show or hide layers by a method call.
   */
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
+  constructor(private pdfService: NgxExtendedPdfViewerService,private router: Router) {
     /* More likely than not you don't need to tweak the pdfDefaultOptions.
        They are a collecton of less frequently used options.
        To illustrate how they're used, here are two example settings: */
