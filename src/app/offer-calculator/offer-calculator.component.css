@@ -25,6 +25,11 @@ li {
   color: #dc3545;
 }
 
+.form-control {
+max-width:80px
+}
+
+
 .pdf-viewer-container {
   position: fixed;
   top: 0;

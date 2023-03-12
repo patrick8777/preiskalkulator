@@ -1,3 +1,5 @@
+declare var Math: any;
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MultilangService } from '../services/multilang.service';
@@ -13,12 +15,13 @@ export class OfferCalculatorComponent {
   constructor(
     public multilangService: MultilangService,
     private multiLang: MultilangService,
-    private router: Router
+    private router: Router,
   ) {}
   services: any = [
     { checked: false, price: 20, name: 'service1' },
     { checked: false, price: 50, name: 'service2' },
   ];
+  
   priceTotal = 0;
   vatPercent = 7.7; // default VAT percentage
   vatAmount = 0;
@@ -91,6 +94,7 @@ export class OfferCalculatorComponent {
 
     this.vatAmount = this.priceTotal * (this.vatPercent / 100);
     this.priceTotal += this.vatAmount;
+    this.vatPercent = parseFloat(this.vatPercent.toFixed(2));
   }
 
   //HTML TO PDF
