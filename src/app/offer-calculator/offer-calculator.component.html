@@ -21,12 +21,10 @@
           <div class="input-group-prepend">
             <!-- <button class="btn btn-danger" type="button" (click)="vatPercent = vatPercent - 0.1"><i class="bi bi-dash"></i></button> -->
           </div>
-          <input type="number" class="form-control" id="vatPercent" name="vatPercent" [(ngModel)]="vatPercent" (change)="calculatePrice()" step="0.1" min="0.1">
+          <input type="number" class="form-control" id="vatPercent" name="vatPercent" [(ngModel)]="vatPercent" (change)="onCheckboxChange()" step="0.1" min="0.0">
           <div class="input-group-append">
-           <!--  <button class="btn btn-success" type="button" (click)="vatPercent = vatPercent + 0.1"><i class="bi bi-plus"></i></button> -->
-          </div>
-        </div>
-      </div>
+            <!-- <button class="btn btn-success" type="button" (click)="vatPercent = vatPercent + 0.1"><i class="bi bi-plus"></i></button> -->
+          
       
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-success">
@@ -47,7 +45,7 @@
             name="options"
             id="option2"
             [(ngModel)]="vatPercent"
-            (click)="calculatePrice()"
+            (click)="onCheckboxChange()"
             value="2.5"
           />
           2.5% VAT
@@ -64,6 +62,9 @@
           3.7% VAT
         </label> -->
       </div>
+    </div>
+  </div>
+</div>
       <h2 class="py-2">
         {{ multilangService.getTranslation("serviceTitel") }}
         <button
@@ -113,7 +114,7 @@
       </ul>
 
       <!-- <h2>{{ multilangService.getTranslation("priceTotal") }}</h2> -->
-      <ng-container *ngIf="!areAllServicesUnchecked()">
+      <ng-container *ngIf="!areAllServicesUnchecked() && vatPercent>=0">
         <table class="col-md-6">
           <thead>
             <tr>
@@ -170,6 +171,9 @@
       </ng-container>
       <div *ngIf="areAllServicesUnchecked()">
         {{ multilangService.getTranslation("selectProduct") }}
+      </div>
+      <div *ngIf="vatPercent<0">
+        {{ multilangService.getTranslation("negativeVat") }}
       </div>
     </div>
   </div>
