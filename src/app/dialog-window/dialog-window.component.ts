@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dialog-window',
@@ -10,6 +10,7 @@ export class DialogWindowComponent {
   @Output() closeEvent = new EventEmitter();
   name: string = '';
   price: number = 0;
+  @Input() onEdit: string = '';
 
   onClose(action: string) {
     if (action === 'save') {
@@ -17,6 +18,10 @@ export class DialogWindowComponent {
         checked: false,
         price: this.price,
         name: this.name,
+        ...(this.onEdit.length && {
+          isEditMode: true,
+          originalName: this.onEdit,
+        }),
       });
     } else if (action === 'close') {
       this.closeEvent.emit();

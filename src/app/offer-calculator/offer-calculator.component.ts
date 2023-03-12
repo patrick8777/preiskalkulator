@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MultilangService } from '../services/multilang.service';
 import jsPDF from 'jspdf';
@@ -10,7 +10,7 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./offer-calculator.component.css'],
 })
 export class OfferCalculatorComponent {
-   constructor(
+  constructor(
     public multilangService: MultilangService,
     private multiLang: MultilangService,
     private router: Router
@@ -23,26 +23,42 @@ export class OfferCalculatorComponent {
   vatPercent = 7.7; // default VAT percentage
   vatAmount = 0;
   showEditModal: boolean = false;
+  editId: string = '';
 
   onToggleEditModal() {
     this.showEditModal = !this.showEditModal;
   }
 
-  addProduct(product: { checked: boolean; price: number; name: string }) {
-    this.services.push(product);
+  addProduct(product: {
+    checked: boolean;
+    price: number;
+    name: string;
+    isEditMode: boolean | undefined | null;
+    originalName: string | undefined | null;
+  }) {
+    if (product.isEditMode && product.originalName) {
+      this.services = this.services.map((service: any) => {
+        if (service.name === product.originalName) {
+          return {
+            checked: product.checked,
+            price: product.price,
+            name: product.name,
+          };
+        }
+        return service;
+      });
+    } else {
+      this.services.push(product);
+    }
+
     this.showEditModal = false;
+    this.editId = '';
   }
 
-  editProduct(name: string, newName: string) {
-    this.services = this.services.map((service: any) => {
-      if (service.name === name) { 
-        return {checked: false, price: 30, name: newName};
-      }
-      // add a default return statement here
-      return service;
-    });
+  editProduct(name: string) {
+    this.showEditModal = true;
+    this.editId = name;
   }
-  
 
   deleteProduct(name: string) {
     this.services = this.services.filter(
@@ -61,6 +77,10 @@ export class OfferCalculatorComponent {
   }
 
   onCheckboxChange(): void {
+    this.calculatePrice();
+  }
+
+  calculatePrice(): void {
     const activeServices: any[] = this.services.filter(
       (service: any) => service.checked
     );
@@ -88,9 +108,9 @@ export class OfferCalculatorComponent {
       // Use the translated filename as the PDF name when saving
       PDF.save(`${fileName}.pdf`);
     });
-  // var link = document.createElement('a');
-  // document.body.appendChild(link);
-  // link.href = `${fileName}.pdf`;
-  // link.click();
-}
+    // var link = document.createElement('a');
+    // document.body.appendChild(link);
+    // link.href = `${fileName}.pdf`;
+    // link.click();
+  }
 }
