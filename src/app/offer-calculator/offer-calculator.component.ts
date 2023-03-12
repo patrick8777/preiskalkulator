@@ -1,10 +1,9 @@
-declare var Math: any;
-
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MultilangService } from '../services/multilang.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-offer-calculator',
@@ -12,6 +11,7 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./offer-calculator.component.css'],
 })
 export class OfferCalculatorComponent {
+  
   constructor(
     public multilangService: MultilangService,
     private multiLang: MultilangService,
@@ -23,10 +23,11 @@ export class OfferCalculatorComponent {
   ];
   
   priceTotal = 0;
-  vatPercent = 7.7; // default VAT percentage
+  @Input() vatPercent:number = 7.7; // default VAT percentage
   vatAmount = 0;
   showEditModal: boolean = false;
   editId: string = '';
+
 
   onToggleEditModal() {
     this.showEditModal = !this.showEditModal;
@@ -64,10 +65,14 @@ export class OfferCalculatorComponent {
   }
 
   deleteProduct(name: string) {
-    this.services = this.services.filter(
-      (service: any) => service.name !== name
-    );
+    const confirmed = confirm('Möchten Sie wirklich das Produkt ' + name + ' löschen?');
+    if (confirmed) {
+      this.services = this.services.filter(
+        (service: any) => service.name !== name
+      );
+    }
   }
+  
 
   areAllServicesUnchecked() {
     let result = true;
@@ -80,9 +85,11 @@ export class OfferCalculatorComponent {
   }
 
   onCheckboxChange(): void {
+    
+    if(this.vatPercent>=0)
     this.calculatePrice();
   }
-
+ 
   calculatePrice(): void {
     const activeServices: any[] = this.services.filter(
       (service: any) => service.checked
@@ -94,7 +101,7 @@ export class OfferCalculatorComponent {
 
     this.vatAmount = this.priceTotal * (this.vatPercent / 100);
     this.priceTotal += this.vatAmount;
-    this.vatPercent = parseFloat(this.vatPercent.toFixed(2));
+    
   }
 
   //HTML TO PDF

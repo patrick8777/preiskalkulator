@@ -170,6 +170,11 @@ export class MultilangService {
       de: 'Bitte wählen Sie mindestens ein Produkt aus.',
       fr: 'Please select at least one product.',
     },
+    negativeVat: {
+      en: 'Vat must not be negative',
+      de: 'Mehrwertsteuer darf nicht negagtive sein',
+      fr: 'Vat must not be negative',
+    },
     addTodu: {
       en: 'Add',
       de: 'Hinzufügen',
