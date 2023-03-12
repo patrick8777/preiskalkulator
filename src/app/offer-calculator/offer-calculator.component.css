@@ -30,7 +30,7 @@ max-width:80px
 }
 
 
-.pdf-viewer-container {
+/* .pdf-viewer-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -56,4 +56,4 @@ max-width:80px
   font-size: 20px;
   color: white;
   cursor: pointer;
-}
+} */
