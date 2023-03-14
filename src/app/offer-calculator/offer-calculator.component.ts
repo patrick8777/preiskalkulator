@@ -73,6 +73,17 @@ export class OfferCalculatorComponent {
     }
   }
   
+  resetCalculator(): void {
+    const confirmed = confirm('Möchten Sie wirklich alles zurücksetzen?');
+    if (confirmed) {
+    this.services.forEach((service: any) => {
+      service.checked = false;
+    });
+    this.priceTotal = 0;
+    this.vatAmount = 0;
+  }
+}
+  
 
   areAllServicesUnchecked() {
     let result = true;

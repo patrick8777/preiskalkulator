@@ -9,132 +9,140 @@
       <i class="bi bi-file-earmark-pdf"></i>
     </button>
    
-    <button class="btn btn-primary btn-block">
-      <i class="bi bi-gear-fill"></i>
+    <button (click)="resetCalculator()" class="btn btn-primary btn-block">
+      <i class="bi bi-bootstrap-reboot"></i>
     </button>
+    
   </div>
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="vatPercent">Mehrwertsteuer</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <!-- <button class="btn btn-danger" type="button" (click)="vatPercent = vatPercent - 0.1"><i class="bi bi-dash"></i></button> -->
-          </div>
-          <input type="number" class="form-control" id="vatPercent" name="vatPercent" [(ngModel)]="vatPercent" (change)="onCheckboxChange()" step="0.1" min="0.0">
-          <div class="input-group-append">
-            <!-- <button class="btn btn-success" type="button" (click)="vatPercent = vatPercent + 0.1"><i class="bi bi-plus"></i></button> -->
-          
-      
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-success">
-          <input
-            type="radio"
-            name="options"
-            id="option1"
-            [(ngModel)]="vatPercent"
-            (click)="calculatePrice()"
-            value="7.7"
-            checked
-          />
-          7.7% VAT
-        </label>
-        <label class="btn btn-primary">
-          <input
-            type="radio"
-            name="options"
-            id="option2"
-            [(ngModel)]="vatPercent"
-            (click)="onCheckboxChange()"
-            value="2.5"
-          />
-          2.5% VAT
-        </label>
-       <!--  <label class="btn btn-danger">
-          <input
-            type="radio"
-            name="options"
-            id="option3"
-            [(ngModel)]="vatPercent"
-            (click)="calculatePrice()"
-            value="3.7"
-          />
-          3.7% VAT
-        </label> -->
-      </div>
-    </div>
-  </div>
-</div>
-      <h2 class="py-2">
-        {{ multilangService.getTranslation("serviceTitel") }}
-        <button
-          class="btn btn-primary btn-block"
-          (click)="onToggleEditModal()"
-          style="margin-bottom: 5px"
-        >
-          <i class="bi bi-plus-lg"></i>
-        </button>
-      </h2>
+  
+<div class="row">
+  <div class="col-md-4">
+    <h2 class="py-2">
+      {{ multilangService.getTranslation("serviceTitel") }}
+      <button
+        class="btn btn-primary btn-block"
+        (click)="onToggleEditModal()"
+        style="margin-bottom: 5px"
+      >
+        <i class="bi bi-plus-lg"></i>
+      </button>
+    </h2>
 
-      <ul>
-        <li *ngFor="let service of services">
-          <div class="col-md-6">
-            <label
-              class="btn btn-outline-secondary"
-              [class.btn-primary]="service.checked"
-              [for]="service.name"
-              style="font-weight: bold; color: rgb(0, 0, 0)"
-            >
-              <input
-                type="checkbox"
-                class="btn-check"
-                [id]="service.name"
-                [name]="service.name"
-                [(ngModel)]="service.checked"
-                (change)="onCheckboxChange()"
-              />
-              <!-- {{ multilangService.getTranslation(service.name) }} -->
-              {{ service.name }}
-            </label>
+    <ul>
+      <li *ngFor="let service of services">
+        <div class="col-md-6">
+          <label
+            class="btn btn-outline-secondary"
+            [class.btn-primary]="service.checked"
+            [for]="service.name"
+            style="font-weight: bold; color: rgb(0, 0, 0)"
+          >
+            <input
+              type="checkbox"
+              class="btn-check"
+              [id]="service.name"
+              [name]="service.name"
+              [(ngModel)]="service.checked"
+              (change)="onCheckboxChange()"
+            />
+            <!-- {{ multilangService.getTranslation(service.name) }} -->
+            {{ service.name }}
+          </label>
 
-            <button
+          <button
             class="btn btn-primary btn-block"
             (click)="editProduct(service.name)"
           >
             <i class="bi bi-pencil-square"></i>
           </button>
-            <button
-              class="btn btn-danger btn-block"
-              (click)="deleteProduct(service.name)"
-            >
-              <i class="bi bi-trash-fill"></i>
-            </button>
-          </div>
-        </li>
-      </ul>
+          <button
+            class="btn btn-danger btn-block"
+            (click)="deleteProduct(service.name)"
+          >
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
 
-      <!-- <h2>{{ multilangService.getTranslation("priceTotal") }}</h2> -->
-      <ng-container *ngIf="!areAllServicesUnchecked() && vatPercent>=0">
-        <table class="col-md-6">
-          <thead>
-            <tr>
-              <th>{{ multilangService.getTranslation("serviceColum") }}</th>
-              <th>{{ multilangService.getTranslation("priceColum") }}</th>
-              <th>{{ multilangService.getTranslation("vatColum") }}</th>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="vatPercent">Mehrwertsteuer</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <!-- <button class="btn btn-danger" type="button" (click)="vatPercent = vatPercent - 0.1"><i class="bi bi-dash"></i></button> -->
+            </div>
+            <input type="number" class="form-control" id="vatPercent" name="vatPercent" [(ngModel)]="vatPercent" (change)="onCheckboxChange()" step="0.1" min="0.0">
+            <div class="input-group-append">
+              <!-- <button class="btn btn-success" type="button" (click)="vatPercent = vatPercent + 0.1"><i class="bi bi-plus"></i></button> -->
+            
+        
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-success">
+            <input
+              type="radio"
+              name="options"
+              id="option1"
+              [(ngModel)]="vatPercent"
+              (click)="calculatePrice()"
+              value="7.7"
+              checked
+            />
+            7.7% VAT
+          </label>
+          <label class="btn btn-primary">
+            <input
+              type="radio"
+              name="options"
+              id="option2"
+              [(ngModel)]="vatPercent"
+              (click)="onCheckboxChange()"
+              value="2.5"
+            />
+            2.5% VAT
+          </label>
+         <!--  <label class="btn btn-danger">
+            <input
+              type="radio"
+              name="options"
+              id="option3"
+              [(ngModel)]="vatPercent"
+              (click)="calculatePrice()"
+              value="3.7"
+            />
+            3.7% VAT
+          </label> -->
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- <h2>{{ multilangService.getTranslation("priceTotal") }}</h2> -->
+    <ng-container *ngIf="!areAllServicesUnchecked() && vatPercent>=0">
+      <table>
+        <thead>
+          <tr>
+            <th>{{ multilangService.getTranslation("serviceColum") }}</th>
+            <th>{{ multilangService.getTranslation("priceColum") }}</th>
+            <th>{{ multilangService.getTranslation("vatColum") }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let service of services">
+            <tr *ngIf="service.checked">
+              <td>{{ multilangService.getTranslation(service.name) }}</td>
+              <td>{{ service.price | currency : "CHF " }}</td>
+              <td>
+                {{ (service.price * vatPercent) / 100 | currency : "CHF " }}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let service of services">
-              <tr *ngIf="service.checked">
-                <td>{{ multilangService.getTranslation(service.name) }}</td>
-                <td>{{ service.price | currency : "CHF " }}</td>
-                <td>
-                  {{ (service.price * vatPercent) / 100 | currency : "CHF " }}
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
+          </ng-container>
+        </tbody>
+      </table>
+ 
+
         <div
           class="card"
           [ngClass]="{
@@ -169,16 +177,17 @@
           </div>
         </div>
       </ng-container>
+    </div>
+  </div>
       <div *ngIf="areAllServicesUnchecked()">
         {{ multilangService.getTranslation("selectProduct") }}
       </div>
       <div *ngIf="vatPercent<0">
         {{ multilangService.getTranslation("negativeVat") }}
-      </div>
-    </div>
+     
   </div>
 </div>
-<div></div>
+<div>
 <!-- <app-footer></app-footer> -->
 <app-dialog-window
   *ngIf="showEditModal"
